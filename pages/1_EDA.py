@@ -1,5 +1,12 @@
 import streamlit as st
+import pandas as pd
 
-st.title("EDA")
+st.title("Exploratory Data Analysis")
 
-st.success("EDA Page Working")
+df = pd.read_csv("data/cleaned_retail.csv")
+
+st.subheader("Dataset Overview")
+st.write(df.head())
+
+st.subheader("Basic Stats")
+st.write(df.describe())

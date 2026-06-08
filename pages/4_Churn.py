@@ -1,12 +1,9 @@
 import streamlit as st
+import pandas as pd
 
-st.title("Customer Churn Prediction")
+st.title("Customer Churn Analysis")
 
-st.success("Churn Prediction Module Completed")
+churn = pd.read_csv("data/churn.csv")
 
-st.write("""
-This module identifies customers likely to stop purchasing.
-Techniques:
-- Machine Learning
-- Classification Models
-""")
+st.subheader("Churn Overview")
+st.dataframe(churn)

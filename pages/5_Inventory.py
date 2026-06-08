@@ -1,5 +1,9 @@
 import streamlit as st
+import pandas as pd
 
 st.title("Inventory Optimization")
 
-st.success("Inventory Page Working")
+inv = pd.read_csv("data/inventory_recs.csv")
+
+st.subheader("Reorder Suggestions")
+st.dataframe(inv)
