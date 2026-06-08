@@ -1,12 +1,13 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Exploratory Data Analysis")
+st.title("📊 Exploratory Data Analysis")
 
-df = pd.read_csv("data/cleaned_retail.csv")
+try:
+    df = pd.read_csv("data/sales_data.csv")
+    st.dataframe(df)
 
-st.subheader("Dataset Overview")
-st.write(df.head())
-
-st.subheader("Basic Stats")
-st.write(df.describe())
+    if "Revenue" in df.columns:
+        st.line_chart(df["Revenue"])
+except Exception as e:
+    st.error(f"EDA file missing: {e}")

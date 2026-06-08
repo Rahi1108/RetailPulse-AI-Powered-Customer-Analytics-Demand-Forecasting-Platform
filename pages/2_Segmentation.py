@@ -1,12 +1,13 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Customer Segmentation")
+st.title("👥 Customer Segmentation")
 
-seg = pd.read_csv("data/segments.csv")
+try:
+    df = pd.read_csv("data/segmentation.csv")
+    st.dataframe(df)
 
-st.subheader("Segment Counts")
-st.bar_chart(seg["Segment"].value_counts())
-
-st.subheader("Segment Table")
-st.dataframe(seg)
+    if "Segment" in df.columns:
+        st.bar_chart(df["Segment"].value_counts())
+except Exception as e:
+    st.error(f"Segmentation file missing: {e}")

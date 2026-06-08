@@ -1,9 +1,11 @@
 import streamlit as st
-import pandas as pd
+from app import load_csv
 
-st.title("Inventory Optimization")
+st.title("Inventory Dashboard")
 
-inv = pd.read_csv("data/inventory_recs.csv")
+df = load_csv("inventory_recs.csv")
 
-st.subheader("Reorder Suggestions")
-st.dataframe(inv)
+st.dataframe(df)
+
+if not df.empty:
+    st.bar_chart(df.set_index("Product")["Stock"])

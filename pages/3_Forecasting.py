@@ -1,8 +1,14 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Demand Forecasting")
+st.title("📈 Forecasting")
 
-fc = pd.read_csv("data/forecast.csv")
+try:
+    df = pd.read_csv("data/forecast.csv")
+    st.dataframe(df)
 
-st.line_chart(fc.set_index("ds")["yhat"])
+    if "yhat" in df.columns:
+        st.line_chart(df["yhat"])
+except Exception as e:
+    st.error(f"Forecast file missing: {e}")
+    
