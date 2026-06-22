@@ -44,7 +44,11 @@
 | RAM | 2GB minimum |
 | Disk | 500MB |
 
-### Setup (3 Steps)
+### 🚀 Live Demo
+
+**Try the app now:** [RetailPulse Live Dashboard](https://retailpulsecustomeranalytics.streamlit.app/)
+
+### Setup (3 Steps - For Local Development)
 
 ```bash
 # 1. Create virtual environment
@@ -59,7 +63,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-**Dashboard:** http://localhost:8501
+**Local Dashboard:** http://localhost:8501
 
 ---
 
