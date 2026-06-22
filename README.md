@@ -71,7 +71,7 @@ streamlit run app.py
 
 ### 6-Stage ML Pipeline
 
-**F-01: Data Exploration** → Automated quality checks on 541,909 transactions
+**F-01: Data Exploration** → Automated quality checks on transactions
 
 **F-02: Customer Segmentation** → RFM + K-Means = 6 business segments
 - 🌟 Champions (35% revenue)
