@@ -125,7 +125,6 @@ RetailPulse/
 │   ├── daily_data_raw.csv
 │   └── inventory_optimization.csv
 ├── app.py                        # Main dashboard
-├── app_enhanced.py               # Advanced variant
 ├── requirements.txt              # Dependencies
 └── README.md                     # This file
 ```
