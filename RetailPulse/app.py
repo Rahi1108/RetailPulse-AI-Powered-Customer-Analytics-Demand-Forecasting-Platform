@@ -949,69 +949,6 @@ def page_inventory_optimization():
         5. **ABC Analysis**: Apply different control strategies based on product value
         """)
 
-
-# ============================================================================
-# PAGE: REPORTS & EXPORT
-# ============================================================================
-
-def page_reports():
-    """Reports and export functionality"""
-    st.markdown('<div class="sub-header">📋 Reports & Export</div>', 
-               unsafe_allow_html=True)
-    
-    data = load_data()
-    
-    st.markdown("### Export Data")
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        if st.button("📥 Export RFM Analysis"):
-            if 'rfm' in data:
-                csv = data['rfm'].to_csv(index=False)
-                st.download_button(
-                    label="Download RFM CSV",
-                    data=csv,
-                    file_name="rfm_analysis.csv",
-                    mime="text/csv"
-                )
-    
-    with col2:
-        if st.button("📥 Export Customer Segments"):
-            if 'segments' in data:
-                csv = data['segments'].to_csv(index=False)
-                st.download_button(
-                    label="Download Segments CSV",
-                    data=csv,
-                    file_name="customer_segments.csv",
-                    mime="text/csv"
-                )
-    
-    with col3:
-        if st.button("📥 Export Churn Predictions"):
-            if 'churn' in data:
-                csv = data['churn'].to_csv(index=False)
-                st.download_button(
-                    label="Download Churn Predictions CSV",
-                    data=csv,
-                    file_name="churn_predictions.csv",
-                    mime="text/csv"
-                )
-    
-    st.markdown("---")
-    
-    st.markdown("""
-    ### Executive Summary
-    
-    **RetailPulse Platform Overview:**
-    - ✅ Real-time demand forecasting with 12% MAPE
-    - ✅ 6-8 meaningful customer segments with actionable insights
-    - ✅ Churn prediction with 88%+ AUC-ROC accuracy
-    - ✅ Inventory optimization reducing stockouts by 30-50%
-    - ✅ Revenue optimization potential: 15-25% increase
-    """)
-
-
 # ============================================================================
 # MAIN APP
 # ============================================================================
