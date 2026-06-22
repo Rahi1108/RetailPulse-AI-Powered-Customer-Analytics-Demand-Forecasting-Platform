@@ -182,7 +182,6 @@ python notebooks/06_Inventory_Optimization.py
 
 # Launch dashboards
 streamlit run app.py              # Main dashboard
-streamlit run app_enhanced.py     # Advanced dashboard
 ```
 
 ---
