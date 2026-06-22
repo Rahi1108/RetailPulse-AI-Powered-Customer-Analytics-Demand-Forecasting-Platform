@@ -39,7 +39,6 @@ wheels/
 # Data files (large)
 *.xlsx
 *.xls
-data/*.csv
 !data/README.md
 
 # Models (large)
