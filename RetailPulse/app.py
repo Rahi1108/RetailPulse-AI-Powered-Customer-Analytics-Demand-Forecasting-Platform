@@ -1005,8 +1005,6 @@ def main():
     - Streamlit for interactive dashboards
     - MLflow for model tracking
     
-    **Author:** Zidio Development
-    **Version:** 2.0
     """)
     
     # Page routing
