@@ -46,7 +46,7 @@
 
 ### 🚀 Live Demo
 
-**Try the app now:** [RetailPulse Live Dashboard](https://retailpulsecustomeranalytics.streamlit.app/)
+**Try the app now:** [RetailPulse Live Dashboard](https://retailcustomeranalytics.streamlit.app/)
 
 ### Setup (3 Steps - For Local Development)
 
