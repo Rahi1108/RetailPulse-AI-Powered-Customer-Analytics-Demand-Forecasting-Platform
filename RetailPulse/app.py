@@ -163,14 +163,17 @@ def page_overview():
     
     if 'rfm' in data:
         rfm = data['rfm']
+        active_customers = len(rfm[rfm['Recency'] <= 90])
+        high_value_pct = (rfm['Monetary'] > rfm['Monetary'].quantile(0.75)).mean() * 100
+
         with col1:
-            st.metric("Total Customers", len(rfm), "Active")
+            st.metric("Total Customers", len(rfm))
         with col2:
             st.metric("Avg Revenue/Customer", f"${rfm['Monetary'].mean():.2f}")
         with col3:
-            st.metric("Active Customers", len(rfm[rfm['Recency'] < 90]), "Last 90 days")
+            st.metric("Recent Customers", active_customers, "Last 90 days")
         with col4:
-            st.metric("High Value %", f"{(rfm['Monetary'] > rfm['Monetary'].quantile(0.75)).sum() / len(rfm) * 100:.1f}%")
+            st.metric("High Value %", f"{high_value_pct:.1f}%")
     
     st.markdown("---")
     
@@ -178,8 +181,10 @@ def page_overview():
     if 'daily' in data:
         daily = data['daily']
         daily['Date'] = pd.to_datetime(daily['Date'])
+        min_date = daily['Date'].min()
+        max_date = daily['Date'].max()
         
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
         
         with col1:
             total_sales = daily['Sales'].sum()
@@ -192,6 +197,34 @@ def page_overview():
         with col3:
             avg_daily_sales = daily['Sales'].mean()
             st.metric("Avg Daily Sales", f"${avg_daily_sales:,.0f}")
+        
+        with col4:
+            st.metric("Data Range", f"{min_date:%Y-%m-%d} → {max_date:%Y-%m-%d}")
+
+        if 'churn' in data:
+            churn_df = data['churn']
+            churn_rate = churn_df['Churn'].mean()
+            risk_count = len(churn_df[churn_df['Risk_Segment'].isin(['High Risk', 'Critical Risk'])])
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Churn Rate", f"{churn_rate:.1%}")
+            with col2:
+                st.metric("At-Risk Customers", risk_count)
+
+        if 'inventory' in data:
+            inv = data['inventory']
+            eoq_value = inv.loc[inv['Metric'] == 'EOQ', 'Value'].astype(float).iloc[0]
+            safety_value = inv.loc[inv['Metric'] == 'Safety Stock', 'Value'].astype(float).iloc[0]
+            reorder_value = inv.loc[inv['Metric'] == 'Reorder Point', 'Value'].astype(float).iloc[0]
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Average EOQ", f"{eoq_value:,.0f} units")
+            with col2:
+                st.metric("Avg Safety Stock", f"{safety_value:,.0f} units")
+            with col3:
+                st.metric("Reorder Point", f"{reorder_value:,.0f} units")
 
 
 # ============================================================================
