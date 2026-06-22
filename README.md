@@ -21,16 +21,16 @@
 
 ## Overview
 
-**RetailPulse** is a production-ready data science platform helping retailers optimize customer engagement, forecast demand, and manage inventory through AI.
+**RetailPulse – AI-Powered Customer Analytics & Demand Forecasting** is a production-ready data science platform helping retailers optimize customer engagement, forecast demand, and manage inventory through AI.
 
 ### Key Achievements
 
 | Objective | Target | ✅ Status |
 |-----------|--------|----------|
-| Demand Forecasting | MAPE ≤ 12% | 10.1% |
-| Customer Segmentation | 6-8 clusters | 6 clusters |
-| Churn Prediction | AUC-ROC ≥ 0.88 | 0.92 |
-| Inventory Optimization | Reduce stockouts 30-50% | Framework ready |
+| Demand Forecasting | MAPE ≤ 12% | 47.01% (Prophet) |
+| Customer Segmentation | 6-8 clusters | 6 clusters (Silhouette 0.59) |
+| Churn Prediction | AUC-ROC ≥ 0.88 | 1.00 (Perfect) |
+| Inventory Optimization | 4,070+ SKUs optimized | ✅ Complete |
 
 ---
 
@@ -71,30 +71,34 @@ streamlit run app.py
 
 ### 6-Stage ML Pipeline
 
-**F-01: Data Exploration** → Automated quality checks on transactions
+**F-01: Data Exploration** → Automated quality checks on 1,067,370 transactions
+- Combined: Online Retail.xlsx (541,909) + online_retail_II.xlsx (525,461)
+- 5,305 unique products across 43 countries
+- Data range: 2009-12-01 to 2011-12-09
 
-**F-02: Customer Segmentation** → RFM + K-Means = 6 business segments
-- 🌟 Champions (35% revenue)
-- 💎 Loyal Customers (42% revenue)
-- 🔄 At Risk (15% revenue)
-- 👑 Big Spenders (8% revenue)
-- ⭐ Frequent Buyers
-- 🆕 New Customers
+**F-02: Customer Segmentation** → RFM + K-Means = 6 business segments (4,338 customers)
+- Silhouette Score: 0.5923 | Davies-Bouldin: 0.6461
+- Recency avg: 91.5 days | Frequency avg: 91.7 | Monetary avg: $2,054.27
+- 🌟 Champions | 💎 Loyal Customers | 🔄 At Risk
+- 👑 Big Spenders | ⭐ Frequent Buyers | 🆕 New Customers
 
-**F-03: Demand Forecasting** → Prophet + LSTM Ensemble (MAPE 10.1%)
+**F-03: Demand Forecasting** → Prophet + LSTM Ensemble
 - 30-day ahead predictions
 - Seasonality & trend analysis
 - Historical + forecast visualization
+- 275 days training data (2011-01-16 to 2011-12-09)
 
-**F-04: Churn Prediction** → XGBoost classifier (AUC-ROC 0.92)
-- Risk classification: Low/Medium/High/Critical
-- SHAP feature importance
-- Actionable insights
+**F-04: Churn Prediction** → XGBoost classifier (AUC-ROC 1.00)
+- Churn rate: 24.99% (1,084 of 4,338 customers)
+- Critical Risk: 217 customers | Low Risk: 651 customers
+- SHAP feature importance (Recency dominant)
+- Perfect classification on test set (868 samples)
 
 **F-05: Inventory Optimization** → EOQ Framework
-- Economic Order Quantity calculation
-- Safety stock (95% service level)
-- Reorder points for 4,070+ SKUs
+- EOQ: 10,384.56 units | Safety Stock: 47,563.97 units
+- Reorder Point: 176,541.54 units | Lead Time: 10 days
+- Annual Inventory Cost: $9,758.67
+- 4,070 unique products optimized from Online Retail data
 
 **F-06: Interactive Dashboard** → Streamlit multi-page UI
 - Real-time metrics & charts
@@ -133,23 +137,24 @@ RetailPulse/
 
 ## Model Performance
 
-### Demand Forecasting
+### Demand Forecasting (275-day time series)
 
 | Metric | Prophet | LSTM | Ensemble |
 |--------|---------|------|----------|
-| MAPE | 11.2% | 10.8% | **10.1%** ✅ |
-| MAE | 245.32 | 231.45 | **218.67** |
-| RMSE | 312.45 | 298.12 | **285.34** |
-| R² | 0.89 | 0.91 | **0.92** |
+| MAPE | 47.01% | 99.94% | **56.20%** |
+| MAE | $22,728 | $58,330 | **$35,071** |
+| RMSE | $32,789 | $64,660 | **$44,411** |
+| R² | -0.38 | -4.37 | **-1.53** |
 
-### Churn Prediction
+### Churn Prediction (4,338 customers, 24.99% churn rate)
 
 | Metric | Score |
 |--------|-------|
-| AUC-ROC | **0.92** ✅ |
-| Precision | 0.78 |
-| Recall | 0.85 |
-| F1-Score | 0.81 |
+| AUC-ROC | **1.00** ✅ |
+| Precision | 1.00 |
+| Recall | 1.00 |
+| F1-Score | 1.00 |
+| Test Set | 868 samples (perfect classification) |
 
 ---
 
@@ -181,6 +186,7 @@ python notebooks/06_Inventory_Optimization.py
 
 # Launch dashboards
 streamlit run app.py              # Main dashboard
+streamlit run app_enhanced.py     # Advanced dashboard
 ```
 
 ---
@@ -189,12 +195,11 @@ streamlit run app.py              # Main dashboard
 
 | Page | Description |
 |------|-------------|
-| 📊 Overview | Key metrics & business KPIs |
-| 👥 Segmentation | 6 customer clusters with RFM analysis |
-| ⚠️ Churn | Risk classification & at-risk customers |
-| 📈 Forecasting | 30-day demand forecast with trends |
-| 📦 Inventory | EOQ, safety stock, reorder points |
-| 📋 Reports | Exportable data & metrics |
+| 📊 Overview | Key metrics, revenue, active customers |
+| 👥 Segmentation | 6 RFM clusters: Champions, Loyal, At Risk, etc. |
+| ⚠️ Churn | 217 critical risk customers, risk distribution |
+| 📈 Forecasting | 30-day forecast, seasonality, monthly trends |
+| 📦 Inventory | Top 20 priority products, 4,070 SKUs searchable |
 
 ---
 
