@@ -960,7 +960,7 @@ def main():
     page = st.sidebar.radio(
         "Select Page",
         ["📊 Overview", "👥 Customer Segmentation", "⚠️ Churn Analysis",
-         "📈 Demand Forecasting", "📦 Inventory", "📋 Reports"]
+         "📈 Demand Forecasting", "📦 Inventory"]
     )
     
     st.sidebar.markdown("---")
@@ -987,8 +987,6 @@ def main():
         page_demand_forecasting()
     elif page == "📦 Inventory":
         page_inventory_optimization()
-    elif page == "📋 Reports":
-        page_reports()
 
 
 if __name__ == "__main__":
