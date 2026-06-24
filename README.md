@@ -47,6 +47,7 @@
 ### 🚀 Live Demo
 
 **Try the app now:** [RetailPulse Live Dashboard](https://zhlhs6cgpab8wzkkrpbx7s.streamlit.app/)
+
 Note: This app is hosted on Streamlit's free cloud, so if it has gone to sleep, please click the 'Yes, get this app back up' button and wait a few seconds for it to load.
 
 ### Setup (3 Steps - For Local Development)
